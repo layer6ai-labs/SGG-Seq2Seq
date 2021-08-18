@@ -2,14 +2,14 @@
 <a href="https://layer6.ai/"><img src="https://github.com/layer6ai-labs/DropoutNet/blob/master/logs/logobox.jpg" width="180"></a>
 </p>
 
-## NeurIPS'19 Guided Similarity Separation for Image Retrieval
+## ICCV'21 Context-aware Scene Graph Generation with Seq2Seq Transformers
 
-Authors: [Chundi Liu](http://www.cs.toronto.edu/~chundiliu), [Guangwei Yu](http://www.cs.toronto.edu/~guangweiyu), [Cheng Chang](https://scholar.google.com/citations?user=X7oyRLIAAAAJ&hl=en), Himanshu Rai, Junwei Ma, [Satya Krishna Gorti](http://www.cs.toronto.edu/~satyag/), [Maksims Volkovs](http://www.cs.toronto.edu/~mvolkovs)  
-[[paper](http://www.cs.toronto.edu/~mvolkovs/NIPS2019_GSS.pdf)][[poster]](http://www.cs.toronto.edu/~chundiliu/data/NeurIPS_GSS%20Poster.pdf)[[slides]](http://www.cs.toronto.edu/~chundiliu/data/GSS%20Slides.m4v)[[video]](https://slideslive.com/38921753/track-3-session-4)
+Authors: [Yichao Lu*](https://www.linkedin.com/in/yichaolu/), [Himanshu Rai*](https://www.linkedin.com/in/himanshu-rai-521b1318/), [Cheng Chang*](https://scholar.google.com/citations?user=X7oyRLIAAAAJ&hl=en), Boris Knyazev, [Guangwei Yu](http://www.cs.toronto.edu/~guangweiyu), , Shashank Shekhar, Graham W. Taylor,  [Maksims Volkovs](http://www.cs.toronto.edu/~mvolkovs)  
+
 
 ## Prerequisites and Environment
 
-* tensorflow-gpu 1.13.1
+* pytorch-gpu 1.13.1
 * numpy 1.16.0
 
 
