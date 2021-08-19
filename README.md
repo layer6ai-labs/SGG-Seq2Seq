@@ -4,7 +4,7 @@
 
 ## ICCV'21 Context-aware Scene Graph Generation with Seq2Seq Transformers
 
-Authors: [Yichao Lu*](https://www.linkedin.com/in/yichaolu/), [Himanshu Rai*](https://www.linkedin.com/in/himanshu-rai-521b1318/), [Cheng Chang*](https://scholar.google.com/citations?user=X7oyRLIAAAAJ&hl=en), Boris Knyazev, [Guangwei Yu](http://www.cs.toronto.edu/~guangweiyu), , Shashank Shekhar, Graham W. Taylor,  [Maksims Volkovs](http://www.cs.toronto.edu/~mvolkovs)  
+Authors: [Yichao Lu*](https://www.linkedin.com/in/yichaolu/), [Himanshu Rai*](https://www.linkedin.com/in/himanshu-rai-521b1318/), [Cheng Chang*](https://scholar.google.com/citations?user=X7oyRLIAAAAJ&hl=en), Boris Knyazev, [Guangwei Yu](http://www.cs.toronto.edu/~guangweiyu), Shashank Shekhar, Graham W. Taylor,  [Maksims Volkovs](http://www.cs.toronto.edu/~mvolkovs)  
 
 
 ## Prerequisites and Environment
@@ -185,5 +185,11 @@ code from the [Detectron.pytorch](https://github.com/roytseng-tw/Detectron.pytor
 
 If you find this code useful in your research, please cite the following paper:
 
-  
+    @inproceedings{lu2021seq2seq,
+      title={Context-aware Scene Graph Generation with Seq2Seq Transformers},
+      author={Yichao Lu, Himanshu Rai, Jason Chang, Boris Knyazev, Shashank Shekhar, Graham W. Taylor, Maksims Volkovs},
+      booktitle={ICCV},
+      year={2021}
+    }
 
+ 
