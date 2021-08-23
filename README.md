@@ -59,51 +59,29 @@ Download pre-trained object detection models [here](https://drive.google.com/ope
 Download our trained models [here](https://drive.google.com/open?id=15w0q3Nuye2ieu_aUNdTS_FNvoVzM4RMF). Unzip it under the root folder and you should see a `trained_models` folder there.
 
 ## Directory Structure
-The final directories for data and detection models should look like:
+The final directories should look like:
 ```
-|-- detection_models
-|   |-- oi_rel
-|   |   |-- X-101-64x4d-FPN
-|   |   |   |-- model_step599999.pth
-|   |-- vg
-|   |   |-- VGG16
-|   |   |   |-- model_step479999.pth
-|   |   |-- X-101-64x4d-FPN
-|   |   |   |-- model_step119999.pth
-|   |-- vrd
-|   |   |-- VGG16
-|   |   |   |-- model_step4499.pth
 |-- data
-|   |-- openimages_v4
-|   |   |-- train    <-- (contains OpenImages_v4 training/validation images)
-|   |   |-- rel
-|   |   |   |-- rel_only_annotations_train.json
-|   |   |   |-- rel_only_annotations_val.json
-|   |   |   |-- ...
-|   |-- vg
-|   |   |-- VG_100K    <-- (contains Visual Genome all images)
-|   |   |-- rel_annotations_train.json
-|   |   |-- rel_annotations_val.json
-|   |   |-- ...
-|   |-- vrd
-|   |   |-- train_images    <-- (contains Visual Relation Detection training images)
-|   |   |-- val_images    <-- (contains Visual Relation Detection validation images)
-|   |   |-- new_annotations_train.json
-|   |   |-- new_annotations_val.json
-|   |   |-- ...
-|-- trained_models
-|   |-- oi_mini_X-101-64x4d-FPN
-|   |   |-- model_step6749.pth
-|   |-- oi_X-101-64x4d-FPN
-|   |   |-- model_step80929.pth
-|   |-- vg_VGG16
-|   |   |-- model_step62722.pth
-|   |-- vg_X-101-64x4d-FPN
-|   |   |-- model_step62722.pth
-|   |-- vrd_VGG16_IN_pretrained
-|   |   |-- model_step7559.pth
-|   |-- vrd_VGG16_COCO_pretrained
-|   |   |-- model_step7559.pth
+|   |-- detections_train.json
+|   |-- detections_val.json
+|   |-- new_annotations_train.json
+|   |-- new_annotations_val.json
+|   |-- objects.json
+|   |-- predicates.json
+|-- evaluation
+|-- output
+|   |-- pair_predicate_dict.dat
+|   |-- train_data.dat
+|   |-- valid_data.dat
+|-- config.py
+|-- core.py
+|-- data_utils.py
+|-- evaluation_utils.py
+|-- feature_utils.py
+|-- file_utils.py
+|-- preprocess.py
+|-- trainer.py
+|-- transformer.py
 ```
 
 ## Evaluating Pre-trained Relationship Detection models
@@ -145,34 +123,32 @@ python ./tools/test_net_rel.py --dataset vrd --cfg configs/vrd/e2e_faster_rcnn_V
 ```
 The results are slightly different with those at the last line of Table 7.
 
-## Training Relationship Detection Models
-
-The section provides the command-line arguments to train our relationship detection models given the pre-trained object detection models described above. **Note:** We do not train object detectors here. We only use trained object detectors (provided in `detection_models/`) to initialize our to-be-trained relationship models.
-
-DO NOT CHANGE anything in the provided config files(configs/xx/xxxx.yaml) even if you want to train with less or more than 8 GPUs. Use the environment variable `CUDA_VISIBLE_DEVICES` to control how many and which GPUs to use.
+## Training Scene Graph Generation Models
 
 With the following command lines, the training results (models and logs) should be in `$ROOT/Outputs/xxx/` where `xxx` is the .yaml file name used in the command without the ".yaml" extension. If you want to test with your trained models, simply run the test commands described above by setting `--load_ckpt` as the path of your trained models.
 
-### Visual Genome
-To train our relationship network using a VGG16 backbone, run
-```
-python tools/train_net_step_rel.py --dataset vg --cfg configs/vg/e2e_faster_rcnn_VGG16_8_epochs_vg_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5_no_spt.yaml --nw 8 --use_tfboard
-```
-
-To train our relationship network using a ResNeXt-101-64x4d-FPN backbone, run
-```
-python tools/train_net_step_rel.py --dataset vg --cfg configs/vg/e2e_faster_rcnn_X-101-64x4d-FPN_8_epochs_vg_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5.yaml --nw 8 --use_tfboard
-```
-
 ### Visual Relation Detection
-To train our relationship network initialized by an ImageNet pre-trained VGG16 model, run
+To train our scene graph generation model on the VRD dataset, run
 ```
-python tools/train_net_step_rel.py --dataset vrd --cfg configs/vrd/e2e_faster_rcnn_VGG16_16_epochs_vrd_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5_IN_pretrained.yaml --nw 8 --use_tfboard
+python preprocess.py
+
+python trainer.py --num-encoder-layers 4 --num-decoder-layers 2 --nhead 4 --num-epochs 500 --learning-rate 1e-3
+
+python preprocess_evaluation.py
+
+python write_prediction.py
 ```
 
-To train our relationship network initialized by a COCO pre-trained VGG16 model, run
+### Visual Genome
+To train our scene graph generation model on the VG dataset, download the json files from https://visualgenome.org/api/v0/api_home.html, put the extracted files under `data` and then run
 ```
-python tools/train_net_step_rel.py --dataset vrd --cfg configs/vrd/e2e_faster_rcnn_VGG16_16_epochs_vrd_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5_COCO_pretrained.yaml --nw 8 --use_tfboard
+python preprocess.py
+
+python trainer.py --num-encoder-layers 4 --num-decoder-layers 2 --nhead 4 --num-epochs 2000 --learning-rate 1e-3
+
+python preprocess_evaluation.py
+
+python write_prediction.py
 ```
 
 ## Acknowledgements
