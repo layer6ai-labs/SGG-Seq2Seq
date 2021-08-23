@@ -15,7 +15,6 @@ Authors: [Yichao Lu*](https://www.linkedin.com/in/yichaolu/), [Himanshu Rai*](ht
 
 All experiments were conducted on a 20-core Intel(R) Xeon(R) CPU E5-2630 v4 @2.20GHz and NVIDIA V100 GPU with 32GB GPU memory.
 
-**Note:** INSTRE dataset contains almost 30k images so the training phase requires ~19GB GPU memory. If your GPU doesn't have sufficient memory, please remove the `--gpu-id` argument and the model will train on the CPU. Training on CPU is approximately 10x slower but converges to the same result.
 
 ## Dataset
 
