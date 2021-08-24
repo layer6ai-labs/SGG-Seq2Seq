@@ -140,8 +140,7 @@ python run_all.py prediction.txt
 ```
 
 ## Acknowledgements
-This repository uses code based on the [ContrastiveLosses4VRD](https://github.com/NVIDIA/ContrastiveLosses4VRD) Ji Zhang,  [Neural-Motifs](https://github.com/rowanz/neural-motifs) source code from Rowan Zellers, as well as
-code from the [Detectron.pytorch](https://github.com/roytseng-tw/Detectron.pytorch) repository by Roy Tseng. See LICENSES for additional details.
+This repository uses code based on the [ContrastiveLosses4VRD](https://github.com/NVIDIA/ContrastiveLosses4VRD) Ji Zhang,  [Neural-Motifs](https://github.com/rowanz/neural-motifs) source code from Rowan Zellers.
 
 
 ## Citation
