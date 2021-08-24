@@ -11,9 +11,10 @@ Authors: [Yichao Lu*](https://www.linkedin.com/in/yichaolu/), [Himanshu Rai*](ht
 
 * pytorch-gpu 1.13.1
 * numpy 1.16.0
+* tqdm
 
 
-All experiments were conducted on a 20-core Intel(R) Xeon(R) CPU E5-2630 v4 @2.20GHz and NVIDIA V100 GPU with 32GB GPU memory.
+All experiments were conducted on a 20-core Intel(R) Xeon(R) CPU E5-2630 v4 @2.20GHz and 4 NVIDIA V100 GPUs with 32GB GPU memory.
 
 
 ## Dataset
@@ -98,31 +99,6 @@ We use three evaluation metrics for Visual Genome:
 1. SGCLS: predict subject, object and predicate labels given ground truth subject and object boxes
 1. PRDCLS: predict predicate labels given ground truth subject and object boxes and labels
 
-To test a trained model using a VGG16 backbone with "SGDET", run
-```
-python ./tools/test_net_rel.py --dataset vg --cfg configs/vg/e2e_faster_rcnn_VGG16_8_epochs_vg_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5_no_spt.yaml --load_ckpt trained_models/vg_VGG16/model_step62722.pth --output_dir Outputs/vg_VGG16 --multi-gpu-testing --do_val
-```
-Use `--use_gt_boxes` option to test it with "SGCLS"; use `--use_gt_boxes --use_gt_labels` options to test it with "PRDCLS". The results will vary slightly with the last line of Table 6 in the paper.
-
-To test a trained model using a vg_X-101-64x4d-FPN backbone with "SGDET", run
-```
-python ./tools/test_net_rel.py --dataset vg --cfg configs/vg/e2e_faster_rcnn_X-101-64x4d-FPN_8_epochs_vg_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5.yaml --load_ckpt trained_models/vg_X-101-64x4d-FPN/model_step62722.pth --output_dir Outputs/vg_X-101-64x4d-FPN --multi-gpu-testing --do_val
-```
-Use `--use_gt_boxes` option to test it with "SGCLS"; use `--use_gt_boxes --use_gt_labels` options to test it with "PRDCLS". The results will vary slightly with those at the last line of Table 1 in the supplementary.
-
-### Visual Relation Detection
-To test a trained model initialized by an ImageNet pre-trained VGG16 model, run
-```
-python ./tools/test_net_rel.py --dataset vrd --cfg configs/vrd/e2e_faster_rcnn_VGG16_16_epochs_vrd_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5_IN_pretrained.yaml --load_ckpt trained_models/vrd_VGG16_IN_pretrained/model_step7559.pth --output_dir Outputs/vrd_VGG16_IN_pretrained --multi-gpu-testing --do_val
-```
-The results are slightly different with those at the second to the last line of Table 7.
-
-To test a trained model initialized by an COCO pre-trained VGG16 model, run
-```
-python ./tools/test_net_rel.py --dataset vrd --cfg configs/vrd/e2e_faster_rcnn_VGG16_16_epochs_vrd_v3_default_node_contrastive_loss_w_so_p_aware_margin_point2_so_weight_point5_COCO_pretrained.yaml --load_ckpt trained_models/vrd_VGG16_COCO_pretrained/model_step7559.pth --output_dir Outputs/vrd_VGG16_COCO_pretrained --multi-gpu-testing --do_val
-```
-The results are slightly different with those at the last line of Table 7.
-
 ## Training Scene Graph Generation Models
 
 With the following command lines, the training results (models and logs) should be in `$ROOT/Outputs/xxx/` where `xxx` is the .yaml file name used in the command without the ".yaml" extension. If you want to test with your trained models, simply run the test commands described above by setting `--load_ckpt` as the path of your trained models.
@@ -137,6 +113,12 @@ python trainer.py --num-encoder-layers 4 --num-decoder-layers 2 --nhead 4 --num-
 python preprocess_evaluation.py
 
 python write_prediction.py
+
+mv prediction.txt evaluation/vrd/
+
+cd evaluation/vrd
+
+python run_all_for_vrd.py prediction.txt
 ```
 
 ### Visual Genome
@@ -149,6 +131,12 @@ python trainer.py --num-encoder-layers 4 --num-decoder-layers 2 --nhead 4 --num-
 python preprocess_evaluation.py
 
 python write_prediction.py
+
+mv prediction.txt evaluation/vg/
+
+cd evaluation/vg
+
+python run_all.py prediction.txt
 ```
 
 ## Acknowledgements
