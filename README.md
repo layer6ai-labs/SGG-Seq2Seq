@@ -4,8 +4,9 @@
 
 ## ICCV'21 Context-aware Scene Graph Generation with Seq2Seq Transformers
 
-Authors: [Yichao Lu*](https://www.linkedin.com/in/yichaolu/), [Himanshu Rai*](https://www.linkedin.com/in/himanshu-rai-521b1318/), [Cheng Chang*](https://scholar.google.com/citations?user=X7oyRLIAAAAJ&hl=en), Boris Knyazev, [Guangwei Yu](http://www.cs.toronto.edu/~guangweiyu), Shashank Shekhar, Graham W. Taylor,  [Maksims Volkovs](http://www.cs.toronto.edu/~mvolkovs)  
-
+Authors: [Yichao Lu*](https://www.linkedin.com/in/yichaolu/), [Himanshu Rai*](https://www.linkedin.com/in/himanshu-rai-521b1318/), [Cheng Chang*](https://scholar.google.com/citations?user=X7oyRLIAAAAJ&hl=en), [Boris Knyazev&dagger;](http://bknyaz.github.io/), [Guangwei Yu](http://www.cs.toronto.edu/~guangweiyu), [Shashank Shekhar&dagger;](https://sshkhr.github.io/), [Graham W. Taylor&dagger;](https://gwtaylor.ca),  [Maksims Volkovs](http://www.cs.toronto.edu/~mvolkovs)  
+* &ast; Denotes equal contribution
+* &dagger; University of Guelph / Vector Institute
 
 ## Prerequisites and Environment
 
