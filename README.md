@@ -150,7 +150,7 @@ If you find this code useful in your research, please cite the following paper:
 
     @inproceedings{lu2021seq2seq,
       title={Context-aware Scene Graph Generation with Seq2Seq Transformers},
-      author={Yichao Lu, Himanshu Rai, Jason Chang, Boris Knyazev, Shashank Shekhar, Graham W. Taylor, Maksims Volkovs},
+      author={Yichao Lu, Himanshu Rai, Jason Chang, Boris Knyazev, Guangwei Yu, Shashank Shekhar, Graham W. Taylor, Maksims Volkovs},
       booktitle={ICCV},
       year={2021}
     }
