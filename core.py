@@ -1,3 +1,6 @@
+from typing import Union
+
+
 class BoundingBox(object):
     __slots__ = [
         'image_id',
@@ -6,26 +9,33 @@ class BoundingBox(object):
         'x_max',
         'y_max',
         'category',
+        'confidence',
         'x_center',
         'y_center'
     ]
 
     def __init__(
             self,
-            image_id: int,
+            image_id: Union[int, str],
             x_min: float,
             x_max: float,
             y_min: float,
             y_max: float,
-            category: int
+            category: int,
+            confidence: float = 1.0
     ):
-        assert 0.0 <= x_min <= x_max <= 1.0 and 0.0 <= y_min <= y_max <= 1.0
+        if not (0.0 <= x_min <= x_max <= 1.0 and 0.0 <= y_min <= y_max <= 1.0):
+            x_min = max(min(x_min, 1.0), 0.0)
+            y_min = max(min(y_min, 1.0), 0.0)
+            x_max = max(min(x_max, 1.0), 0.0)
+            y_max = max(min(y_max, 1.0), 0.0)
         self.image_id = image_id
         self.x_min = x_min
         self.y_min = y_min
         self.x_max = x_max
         self.y_max = y_max
         self.category = category
+        self.confidence = confidence
         self.x_center = (x_min + x_max) / 2
         self.y_center = (y_min + y_max) / 2
 
