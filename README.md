@@ -107,9 +107,9 @@ With the following command lines, the training results (models and logs) should 
 ### Visual Relation Detection
 To train our scene graph generation model on the VRD dataset, run
 ```
-python preprocess.py
+python preprocess_vrd.py
 
-python trainer.py --num-encoder-layers 4 --num-decoder-layers 2 --nhead 4 --num-epochs 500 --learning-rate 1e-3
+python trainer.py --dataset vrd --num-encoder-layers 4 --num-decoder-layers 2 --nhead 4
 
 python preprocess_evaluation.py
 
@@ -125,9 +125,9 @@ python run_all_for_vrd.py prediction.txt
 ### Visual Genome
 To train our scene graph generation model on the VG dataset, download the json files from https://visualgenome.org/api/v0/api_home.html, put the extracted files under `data` and then run
 ```
-python preprocess.py
+python preprocess_vg.py
 
-python trainer.py --num-encoder-layers 4 --num-decoder-layers 2 --nhead 4 --num-epochs 2000 --learning-rate 1e-3
+python trainer.py --dataset vg --num-encoder-layers 4 --num-decoder-layers 2 --nhead 4
 
 python preprocess_evaluation.py
 
